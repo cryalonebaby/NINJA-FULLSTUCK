@@ -1,0 +1,25 @@
+{
+	"name": "ninja-2",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"server": "nodemon index.js",
+		"client": "npm run start --prefix client",
+		"client:build": "npm run build --prefix client",
+		"dev": "cross-env NODE_ENV=development concurrently \"npm run server\" \"npm run client\""
+	},
+	"author": "Nikita Yurchenko",
+	"license": "ISC",
+	"dependencies": {
+		"dotenv": "^16.1.2",
+		"express": "^4.18.2",
+		"express-validator": "^7.0.1",
+		"mongoose": "^7.2.2",
+		"nodemon": "^2.0.22"
+	},
+	"devDependencies": {
+		"concurrently": "^8.0.1",
+		"cross-env": "^7.0.3"
+	}
+}
