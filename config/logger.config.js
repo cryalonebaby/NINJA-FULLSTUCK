@@ -2,7 +2,7 @@ const { createLogger, transports, format } = require('winston')
 const { combine, timestamp, json, prettyPrint } = format;
 require('dotenv').config();
 
-
+// logger template for error and info logs
 const logger = createLogger({
   format: combine(
     timestamp(),

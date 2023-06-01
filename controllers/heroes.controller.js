@@ -1,7 +1,7 @@
 const heroesService = require('../services/heroes.service');
 const logger = require('../config/logger.config')
 
-// Получить список героев
+// Get a list of heroes
 const getAllHeroes = async (req, res) => {
   try {
     const { page } = req.query;
@@ -13,7 +13,7 @@ const getAllHeroes = async (req, res) => {
   }
 };
 
-// Получить информацию о конкретном герое
+// Get information about a specific hero
 const getHeroById = async (req, res) => {
   const { id } = req.params;
   try {
@@ -25,7 +25,7 @@ const getHeroById = async (req, res) => {
   }
 };
 
-// Создать нового героя
+// Create a new hero
 const createHero = async (req, res) => {
   try {
     const hero = await heroesService.createHero(req.body);
@@ -36,7 +36,7 @@ const createHero = async (req, res) => {
   }
 };
 
-// Обновить информацию о герое
+// Update hero information
 const updateHero = async (req, res) => {
   const { id } = req.params;
   try {
@@ -48,7 +48,7 @@ const updateHero = async (req, res) => {
   }
 };
 
-// Удалить героя
+// Delete hero
 const deleteHero = async (req, res) => {
   const { id } = req.params;
   try {

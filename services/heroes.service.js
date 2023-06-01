@@ -1,6 +1,6 @@
 const Hero = require('../models/hero.model');
 
-// Получить список героев
+// Get a list of heroes
 const getAllHeroes = async (page) => {
   // number of records to show on one page
   const perPage = 5
@@ -22,25 +22,25 @@ const getAllHeroes = async (page) => {
   return { pages, heroes };
 };
 
-// Получить информацию о конкретном герое
+// Get information about a specific hero
 const getHeroById = async (id) => {
   const hero = await Hero.findById(id);
   return hero;
 };
 
-// Создать нового героя
+// Create a new hero
 const createHero = async (heroData) => {
   const hero = await Hero.create(heroData);
   return hero;
 };
 
-// Обновить информацию о герое
+// Update hero information
 const updateHero = async (id, heroData) => {
   const hero = await Hero.findByIdAndUpdate(id, heroData, { new: true });
   return hero;
 };
 
-// Удалить героя
+// Delete hero
 const deleteHero = async (id) => {
   await Hero.findByIdAndDelete(id);
 };

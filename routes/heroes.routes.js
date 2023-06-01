@@ -2,19 +2,19 @@ const { Router } = require('express');
 const heroesController = require('../controllers/heroes.controller');
 const router = Router()
 
-// Получить список героев
+// Get a list of heroes
 router.get('/', heroesController.getAllHeroes);
 
-// Получить информацию о конкретном герое
+// Get information about a specific hero
 router.get('/:id', heroesController.getHeroById);
 
-// Создать нового героя
+// Create a new hero
 router.post('/', heroesController.createHero);
 
-// Обновить информацию о герое
+// Update hero information
 router.put('/:id', heroesController.updateHero);
 
-// Удалить героя
+// Delete hero
 router.delete('/:id', heroesController.deleteHero);
 
 module.exports = router;
