@@ -1,9 +1,25 @@
 const Hero = require('../models/hero.model');
 
 // Получить список героев
-const getAllHeroes = async () => {
-  const heroes = await Hero.find();
-  return heroes;
+const getAllHeroes = async (page) => {
+  // number of records to show on one page
+  const perPage = 5
+
+  // total number of records
+  const total = await Hero.countDocuments()
+
+  // amount of pages
+  const pages = Math.ceil(total / perPage)
+
+  // get current page
+  const current = page ?? 1
+
+  // records start from
+  const startFrom = (current - 1) * perPage
+
+  const heroes = await Hero.find().skip(startFrom).limit(perPage).sort({ _id: -1 })
+
+  return { pages, heroes };
 };
 
 // Получить информацию о конкретном герое

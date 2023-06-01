@@ -2,6 +2,7 @@ const express = require('express')
 const app = express()
 const mongoose = require('mongoose')
 const bodyParser = require('body-parser');
+const logger = require('./config/logger.config')
 const heroesRoutes = require('./routes/heroes.routes');
 require('dotenv').config();
 
@@ -18,9 +19,9 @@ async function start() {
       useNewUrlParser: true,
       useUnifiedTopology: true
     })
-    app.listen(PORT, () => console.log(`App started on port ${PORT}`))
+    app.listen(PORT, () => logger.info(`App started on port ${PORT}`))
   } catch (e) {
-    console.log('Server Error', e.message);
+    logger.error('Server Error', e.message);
     process.exit(1)
   }
 }
