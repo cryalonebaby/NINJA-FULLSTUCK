@@ -1,10 +1,10 @@
+import React from 'react';
 
-function App() {
-  return (
-    <div className="App">
-      Hello App
-    </div>
-  );
-}
+import RoutesWrapper from './routing';
+import './index.css';
+
+const App = () => {
+	return <RoutesWrapper />;
+};
 
 export default App;
