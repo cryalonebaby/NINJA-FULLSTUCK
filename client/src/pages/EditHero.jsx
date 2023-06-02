@@ -4,9 +4,9 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchOneHero } from '../redux/slices/heroesSlice';
 
-import { HeroInfo, PageHOC } from '../components';
+import { FormComponent, PageHOC } from '../components';
 
-const Hero = () => {
+const EditHero = () => {
 	const { id } = useParams();
 
 	const navigate = useNavigate();
@@ -24,7 +24,7 @@ const Hero = () => {
 		}
 	}, [status]);
 
-	return <HeroInfo hero={hero} />;
+	return <FormComponent hero={hero} />;
 };
 
-export default PageHOC(Hero);
+export default PageHOC(EditHero);

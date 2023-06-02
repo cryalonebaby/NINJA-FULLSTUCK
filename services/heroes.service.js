@@ -12,14 +12,16 @@ const getAllHeroes = async (page) => {
   const pages = Math.ceil(total / perPage)
 
   // get current page
-  const current = page ?? 1
+  const current = Number(page ?? 1)
 
   // records start from
   const startFrom = (current - 1) * perPage
 
   const heroes = await Hero.find().skip(startFrom).limit(perPage).sort({ _id: -1 })
 
-  return { pages, heroes };
+  return {
+    pages, heroes, current
+  };
 };
 
 // Get information about a specific hero

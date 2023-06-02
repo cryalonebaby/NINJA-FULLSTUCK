@@ -1,5 +1,5 @@
-import { Home, Hero } from "../../pages";
-import { HOME_PATH, HERO_PATH } from "./paths";
+import { Home, Hero, CreateHero, EditHero } from "../../pages";
+import { HOME_PATH, HERO_PATH, CREATE_PATH, EDIT_PATH } from "./paths";
 
 export const PrivateRoutes = [
   {
@@ -9,5 +9,13 @@ export const PrivateRoutes = [
   {
     path: HERO_PATH,
     element: Hero
+  },
+  {
+    path: CREATE_PATH,
+    element: CreateHero
+  },
+  {
+    path: EDIT_PATH,
+    element: EditHero
   },
 ]
