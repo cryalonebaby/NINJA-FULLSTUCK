@@ -6,7 +6,7 @@ import { deleteHero, fetchHeroes } from '../../redux/slices/heroesSlice';
 
 import { Edit as EditIcon, Delete as DeleteIcon } from '@mui/icons-material';
 
-import ModalDelete from '../SmallComponents/ModalDelete';
+import { ModalDelete } from '..';
 
 import styles from '../../styles';
 
@@ -38,12 +38,14 @@ const HeroCard = ({ hero }) => {
 					<h3 className={styles.cardName}>{hero.nickname}</h3>
 					<div>
 						<button
+							data-testid="edit-button"
 							onClick={() => navigate(`/edit/${hero._id}`)}
 							className={`${styles.cardBtn} ${styles.cardBtnLeft}`}
 						>
 							<EditIcon />
 						</button>
 						<button
+							data-testid="delete-button"
 							onClick={handleModal}
 							className={`${styles.cardBtn} ${styles.cardBtnRight}`}
 						>
@@ -58,55 +60,6 @@ const HeroCard = ({ hero }) => {
 				handleDelete={handleDelete}
 			/>
 		</>
-
-		// <Box>
-		// 	<Card sx={{ width: 345, height: 450 }}>
-		// 		<CardMedia
-		// 			component="img"
-		// 			height="240"
-		// 			image={hero.images[0]}
-		// 			alt="hero"
-		// 		/>
-		// 		<CardContent>
-		// 			<Typography
-		// 				gutterBottom
-		// 				variant="h5"
-		// 				component="div"
-		// 				textAlign={'center'}
-		// 				data-testid="nickname"
-		// 			>
-		// 				{hero.nickname}
-		// 			</Typography>
-		// 		</CardContent>
-		// 		<CardActions
-		// 			sx={{
-		// 				display: 'flex',
-		// 				justifyContent: 'space-between',
-		// 			}}
-		// 		>
-		// 			<Button size="small" onClick={() => navigate(`/hero/${hero._id}`)}>
-		// 				Learn More
-		// 			</Button>
-		// 			<Box display={'flex'}>
-		// 				<IconButton
-		// 					onClick={() => navigate(`/edit/${hero._id}`)}
-		// 					size="small"
-		// 					sx={{ display: 'flex' }}
-		// 				>
-		// 					<EditIcon />
-		// 				</IconButton>
-		// 				<IconButton
-		// 					onClick={handleModal}
-		// 					size="small"
-		// 					sx={{ display: 'flex' }}
-		// 				>
-		// 					<DeleteIcon sx={{ color: 'darkred' }} />
-		// 				</IconButton>
-		// 			</Box>
-		// 		</CardActions>
-		// 	</Card>
-
-		// </Box>
 	);
 };
 
