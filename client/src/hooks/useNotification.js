@@ -4,6 +4,7 @@ const useNotification = () => {
   const notify = (message, type = 'info', options = {}) => {
     const toastOptions = { ...options, position: 'bottom-right' };
 
+    // depends on type call particular toast
     switch (type) {
       case 'info':
         toast.info(message, toastOptions);

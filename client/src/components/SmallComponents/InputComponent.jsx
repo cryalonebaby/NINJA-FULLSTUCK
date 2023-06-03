@@ -3,9 +3,11 @@ import React from 'react';
 import { FormControl, InputLabel, Input } from '@mui/material';
 
 const InputComponent = ({ label, name, value, handler }) => {
+	const inputId = `${name}-input`;
+
 	return (
 		<FormControl variant="standard">
-			<InputLabel>{label}</InputLabel>
+			<InputLabel htmlFor={inputId}>{label}</InputLabel>
 			<Input
 				sx={{
 					width: {
@@ -18,6 +20,7 @@ const InputComponent = ({ label, name, value, handler }) => {
 				value={value}
 				onChange={handler}
 				name={name}
+				id={inputId}
 			/>
 		</FormControl>
 	);

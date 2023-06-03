@@ -2,8 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchHeroes } from '../../redux/slices/heroesSlice';
 
-import HeroCard from './HeroCard';
-import PaginationComponent from '../SmallComponents/PaginationComponent';
+import { HeroCard, PaginationComponent } from '..';
 
 import { Box } from '@mui/material';
 import { styled } from '@mui/system';
@@ -41,8 +40,6 @@ const Collection = () => {
 	const dispatch = useDispatch();
 	const { heroes } = useSelector((state) => state);
 
-	console.log(heroes);
-
 	const isLoading = heroes.status === 'loading';
 
 	useEffect(() => {
@@ -50,14 +47,14 @@ const Collection = () => {
 	}, []);
 
 	return (
-		<StyledBox>
+		<StyledBox data-testid="collection-component">
 			<PaginationComponent />
 			<GalleryBox>
 				{isLoading ? (
 					<div>Loading...</div>
 				) : (
-					heroes.items.map((hero) => (
-						<div key={hero._id}>
+					heroes.items?.map((hero, i) => (
+						<div key={hero._id} data-testid={`hero-card-${i + 1}`}>
 							<HeroCard hero={hero} />
 						</div>
 					))

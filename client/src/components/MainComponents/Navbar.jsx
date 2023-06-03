@@ -13,7 +13,7 @@ import { Add as AddIcon } from '@mui/icons-material';
 
 import { styled } from '@mui/system';
 
-const StyledTypographyInvisible = styled(Typography)(({ theme }) => ({
+const StyledTypography = styled(Typography)(({ theme }) => ({
 	marginLeft: 2,
 	marginRight: 2,
 	display: 'flex',
@@ -23,24 +23,7 @@ const StyledTypographyInvisible = styled(Typography)(({ theme }) => ({
 	letterSpacing: '.3rem',
 	color: 'inherit',
 	textDecoration: 'none',
-	[theme.breakpoints.down('md')]: {
-		display: 'none',
-	},
-}));
-
-const StyledTypography = styled(Typography)(({ theme }) => ({
-	marginLeft: 2,
-	marginRight: 2,
-	display: 'none',
-	flexGrow: 1,
-	fontFamily: 'monospace',
-	fontWeight: 700,
-	letterSpacing: '.3rem',
-	color: 'inherit',
-	textDecoration: 'none',
-	[theme.breakpoints.down('md')]: {
-		display: 'flex',
-	},
+	cursor: 'pointer',
 }));
 
 const Navbar = () => {
@@ -48,15 +31,13 @@ const Navbar = () => {
 
 	return (
 		<AppBar
+			role="navigation"
 			position="static"
 			sx={{ background: '#202020', minWidth: 350, paddingX: 3 }}
 		>
 			<Container maxWidth="xl">
 				<Toolbar disableGutters>
-					<StyledTypographyInvisible variant="h6" noWrap component="a" href="/">
-						SUPERHEROES
-					</StyledTypographyInvisible>
-					<StyledTypography variant="h5" noWrap component="a" href="/">
+					<StyledTypography onClick={() => navigate('/')} variant="h5" noWrap>
 						SUPERHEROES
 					</StyledTypography>
 

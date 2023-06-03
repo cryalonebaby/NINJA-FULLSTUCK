@@ -1,8 +1,6 @@
 import React from 'react';
 
-import Navbar from '../MainComponents/Navbar';
-import Footer from '../MainComponents/Footer';
-import Notification from '../SmallComponents/Notification';
+import { Navbar, Footer, Notification } from '..';
 
 import styles from '../../styles';
 
