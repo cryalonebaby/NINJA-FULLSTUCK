@@ -4,16 +4,14 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { createHero, updateHero } from '../../redux/slices/heroesSlice';
 
-import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
-import { storage } from '../../firebase';
+import {
+	handleUploadImagesCreate,
+	handleUploadImagesEdit,
+} from '../../utils/uploadUtils';
 
-import InputComponent from '../SmallComponents/InputComponent';
-import SubmitButton from '../SmallComponents/SubmitButton';
-import FormGallery from '../SmallComponents/FormGallery';
+import { InputComponent, SubmitButton, FormGallery } from '..';
 
 import { Box, Container, Grid } from '@mui/material';
-
-import randomString from '../../utils/randomString';
 
 const FormComponent = ({ hero }) => {
 	const navigate = useNavigate();
@@ -35,6 +33,7 @@ const FormComponent = ({ hero }) => {
 		catch_phrase: hero?.catch_phrase || '',
 	});
 
+	// when hero loaded update all states
 	useEffect(() => {
 		setImages(hero?.images || []);
 		setSelectedImages(hero?.images || []);
@@ -47,6 +46,7 @@ const FormComponent = ({ hero }) => {
 		});
 	}, [hero]);
 
+	// unique handleInputs for text forms
 	const handleInput = (e) => {
 		const { name, value } = e.target;
 		setValues({
@@ -55,17 +55,22 @@ const FormComponent = ({ hero }) => {
 		});
 	};
 
+	// function that reacts immediately after we choose the picture in input
 	const handleChange = (e) => {
 		const [img] = e.target.files;
 
 		if (img) {
 			const localURL = URL.createObjectURL(img);
 
+			// add img as an OBJ
 			setImages([...images, img]);
+
+			// add img as an local URL for fast preview
 			setSelectedImages([...selectedImages, localURL]);
 		}
 	};
 
+	// if particular ceil has an image, we remove it, otherwise we open input
 	const handleImagePick = (index) => {
 		if (!selectedImages[index]) {
 			inputFile.current.click();
@@ -76,64 +81,19 @@ const FormComponent = ({ hero }) => {
 		}
 	};
 
-	const handleUploadImagesEdit = async (images) => {
-		const updatedImages = [...images];
-
-		console.log('FIRST CHECK', updatedImages);
-
-		for (let i = 0; i < images.length; i++) {
-			const img = images[i];
-
-			// either not equal or images from hero less than current amount
-			// prevent from uploading images that already uploaded
-			if (!img === updatedImages[i] || !updatedImages[i]) {
-				const string = randomString();
-				const imgRef = ref(storage, `heroes/${string}-${img.name}`);
-
-				const snapshot = await uploadBytes(imgRef, img);
-				const url = await getDownloadURL(snapshot.ref);
-
-				updatedImages.push(url);
-			}
-		}
-
-		console.log('SECOND CHECK', updatedImages);
-
-		return updatedImages;
-	};
-
-	const handleUploadImagesCreate = async (images) => {
-		const updatedImages = [];
-
-		console.log('FIRST CHECK', updatedImages);
-
-		for (let i = 0; i < images.length; i++) {
-			const img = images[i];
-
-			const string = randomString();
-			const imgRef = ref(storage, `heroes/${string}-${img.name}`);
-
-			const snapshot = await uploadBytes(imgRef, img);
-			const url = await getDownloadURL(snapshot.ref);
-
-			updatedImages.push(url);
-		}
-
-		console.log('SECOND CHECK', updatedImages);
-
-		return updatedImages;
-	};
-
+	// function that runs after form is submitted
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		let updatedImages;
 
+		// check either we create hero or update hero
 		if (hero) {
 			updatedImages = await handleUploadImagesEdit(images);
 		} else {
 			updatedImages = await handleUploadImagesCreate(images);
 		}
 
+		// run dispatch that depends on our goal and only if we have at least 1 pic
 		if (updatedImages.length > 0) {
 			hero
 				? dispatch(
@@ -145,9 +105,12 @@ const FormComponent = ({ hero }) => {
 	};
 
 	return (
-		<Container sx={{ marginTop: 4, minWidth: 300 }}>
+		<Container
+			sx={{ marginTop: 4, minWidth: 300 }}
+			data-testid="form-component"
+		>
 			<Box sx={{ textAlign: 'center' }}>
-				<form onSubmit={handleSubmit}>
+				<form data-testid="form" onSubmit={handleSubmit}>
 					<Grid container spacing={6}>
 						<Grid item xs={12} sm={12}>
 							<FormGallery

@@ -18,12 +18,16 @@ const style = {
 
 const ModalDelete = ({ isOpen, handleModal, handleDelete }) => {
 	return (
-		<Modal hideBackdrop open={isOpen}>
+		<Modal hideBackdrop open={isOpen} data-testid="modal-delete">
 			<Box sx={{ ...style, width: 200 }}>
 				<Typography>Are you sure to delete?</Typography>
 				<Box display={'flex'}>
 					<Button onClick={handleModal}>No</Button>
-					<Button color="secondary" onClick={handleDelete}>
+					<Button
+						data-testid="modal-delete-button"
+						color="secondary"
+						onClick={handleDelete}
+					>
 						Delete
 					</Button>
 				</Box>

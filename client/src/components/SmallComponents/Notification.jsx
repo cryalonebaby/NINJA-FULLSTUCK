@@ -26,7 +26,11 @@ const Notification = () => {
 		}
 	}, [status]);
 
-	return <ToastContainer />;
+	return (
+		<div data-testid="notification">
+			<ToastContainer />
+		</div>
+	);
 };
 
 export default Notification;
